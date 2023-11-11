@@ -9,6 +9,7 @@
 <p align="center">
   <a href="#how-to-install">How To Install</a> •
   <a href="#how-to-use">How To Use</a> •
+  <a href="#how-to-clone">How To Clone</a> •
   <a href="#how-to-run-tests">How To Run Tests</a> •
   <a href="#credits">Credits</a> •
   <a href="#support">Support</a> •
@@ -33,6 +34,18 @@ const brrrrNode = require('brrrr-node');
 
 const brrrr = brrrrNode.calculate(100000, 20000, 5000, 1000, 150000, 1200, 2000, 75, 8, 5, 2, 1, 1);
 // ...
+```
+
+## How To Clone
+
+If you would like a copy of the repository to review or run tests against you can clone the repository with:
+
+```bash
+# Clone the repository
+$ git clone git@github.com:alfreema/brrrr-node
+
+# Install dependencies
+$ npm i
 ```
 
 ## How To Run Tests
