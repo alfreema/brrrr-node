@@ -1,0 +1,17 @@
+{
+  "name": "brrrr-node",
+  "version": "1.0.0",
+  "description": "BRRRR calculations that can be imported into node projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },  
+  "author": "Aaron Freeman",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
