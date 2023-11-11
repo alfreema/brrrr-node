@@ -1,5 +1,9 @@
-const investment = require('./investment');
-const cashflow = require('./cashflow');
+const buy = require('./buy');
+const rehab = require('./rehab');
+const rent = require('./rent');
+const refinance = require('./refinance');
+
+const analyze = require('./analyze');
 
 /**
  * Calculate various financial metrics for a real estate investment.
@@ -28,13 +32,13 @@ const cashflow = require('./cashflow');
  * @property {number} cashOnCashReturn - Cash-on-Cash return percentage.
  */
 function calculate(PP, R, C, CC, ARV, Rt, RefiC, LTV, PMF, VP, MP, IP, PTP) {
-  const totalInvestment = investment.calculateTotalInvestment(PP, R, C, CC);
-  const equityAfterRehab = investment.calculateEquityAfterRehab(ARV, totalInvestment);
-  const loanAmountBeforeRefi = investment.calculateLoanAmountBeforeRefi(ARV, LTV);
-  const LAAR = investment.calculateLoanAmountAfterRefi(loanAmountBeforeRefi, RefiC);
-  const cashOutRefinance = investment.calculateCashOutRefinance(LAAR, totalInvestment);
-  const annualCashFlow = cashflow.calculateAnnualCashFlow(Rt, CC, PMF, VP, MP, IP, PTP);
-  const cashOnCashReturn = investment.calculateCashOnCashReturn(annualCashFlow, totalInvestment);
+  const totalInvestment = buy.calculateTotalInvestment(PP, R, C, CC);
+  const equityAfterRehab = rehab.calculateEquityAfterRehab(ARV, totalInvestment);
+  const loanAmountBeforeRefi = refinance.calculateLoanAmountBeforeRefi(ARV, LTV);
+  const LAAR = refinance.calculateLoanAmountAfterRefi(loanAmountBeforeRefi, RefiC);
+  const cashOutRefinance = refinance.calculateCashOutRefinance(LAAR, totalInvestment);
+  const annualCashFlow = rent.calculateAnnualCashFlow(Rt, CC, PMF, VP, MP, IP, PTP);
+  const cashOnCashReturn = analyze.calculateCashOnCashReturn(annualCashFlow, totalInvestment);
 
   return {
     totalInvestment,

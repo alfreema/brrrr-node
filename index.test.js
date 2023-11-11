@@ -10,14 +10,14 @@ test('calculate function', () => {
 // Test the cashflow function
 test('cashflow function', () => {
   // Your test cases for cashflow function
-  const result = plugin.cashflow.calculateAnnualCashFlow(1200, 2000, 8, 5, 2, 1, 1);
+  const result = plugin.rent.calculateAnnualCashFlow(1200, 2000, 8, 5, 2, 1, 1);
   expect(result).toBe(-995.36);
 });
 
 // Test the investment function
 test('investment function', () => {
   // Your test cases for investment function
-  const result = plugin.investment.calculateCashOnCashReturn(200, 126000);
+  const result = plugin.analyze.calculateCashOnCashReturn(200, 126000);
   expect(result).toBe(1.9047619047619049);
 });
 
