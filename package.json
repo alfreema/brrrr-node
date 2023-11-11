@@ -8,7 +8,7 @@
   },
   "jest": {
     "testEnvironment": "node"
-  },  
+  },
   "author": "Aaron Freeman",
   "license": "ISC",
   "dependencies": {

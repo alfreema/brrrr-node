@@ -9,6 +9,7 @@
 <p align="center">
   <a href="#how-to-install">How To Install</a> •
   <a href="#how-to-use">How To Use</a> •
+  <a href="#how-to-run-tests">How To Run Tests</a> •
   <a href="#credits">Credits</a> •
   <a href="#support">Support</a> •
   <a href="#license">License</a>
@@ -23,10 +24,6 @@ To add these calculations to your node application, you'll need [Git](https://gi
 $ npm install alfreema/brrrr-node
 ```
 
-> **Note**
-> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-
 ## How To Use
 
 In your node application, `require` the plugin and call the `calculate` function.
@@ -37,6 +34,18 @@ const brrrrNode = require('brrrr-node');
 const brrrr = brrrrNode.calculate(100000, 20000, 5000, 1000, 150000, 1200, 2000, 75, 8, 5, 2, 1, 1);
 // ...
 ```
+
+## How To Run Tests
+
+All functions are tested using the [Jest](https://jestjs.io/) testing framework.  To run the tests:
+
+```bash
+# Run the tests
+$ npm test
+```
+
+> **Note**
+> If you get any errors, please report them!
 
 ## Credits
 
