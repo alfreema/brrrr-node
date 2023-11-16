@@ -11,7 +11,6 @@ const purchase = (lib, terms, propertyOwnershipRates) => {
   return purchase
 }
 
-
 const simulate = financeDetails => {
   if(financeDetails?.traditionalMortgageLoan) {
     return purchase('./buy/traditional-mortgage-loan.js', financeDetails.traditionalMortgageLoan, financeDetails.propertyOwnershipRates)

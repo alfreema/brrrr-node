@@ -1,6 +1,7 @@
 const buy = require('./simulations/buy.js');
 const rehab = require('./simulations/rehab.js');
 const rent = require('./simulations/rent.js');
+const refinance = require('./simulations/refinance.js');
 
 const propertyOwnershipRates = {
   propertyTaxRate: 1.2, // 1.2% property tax rate
@@ -9,7 +10,7 @@ const propertyOwnershipRates = {
 };
 
 const traditionalMortgageLoan = { 
-  propertyPrice: 200000, // Replace with the actual property price
+  propertyPrice: 160000, // Replace with the actual property price
   downPaymentPercentage: 20, // 20% down payment
   loanTermYears: 30, // 30-year loan term
   annualInterestRate: 4.5, // 4.5% annual interest rate,
@@ -24,10 +25,22 @@ const hardMoneyLoan = {
   closingCostRate: 3 // 3% closing cost rate
 }
 
+const rehabParameters = {
+  afterRepairValue: 240000,
+  repairCosts: 25000
+}
+
 const cashflowParameters = {
   monthlyRent: 2000,                   // Example monthly rent amount
   propertyManagementRate: 8,          // Example property management rate as a percentage
   vacancyRate: 5                      // Example vacancy rate as a percentage
+};
+
+const traditionalMortgageRefinance = {
+  afterRepairValue: 280000,     // Example After Repair Value
+  loanToValue: 70,              // Example Loan-to-Value ratio
+  refinanceCostRate: 3,         // Example Refinancing Costs
+  carryDuration: 6              // In months
 };
 
 const buyResult = buy.simulate({ 
@@ -36,9 +49,8 @@ const buyResult = buy.simulate({
 })
 console.log('buyResult=', buyResult)
 const rehabResult = rehab.simulate({ 
-  afterRepairValue: 240000,
-  propertyPrice: traditionalMortgageLoan.propertyPrice,
-  repairCosts: 25000
+  ...rehabParameters,
+  propertyPrice: traditionalMortgageLoan.propertyPrice
 })
 console.log('rehabResult=', rehabResult)
 const rentResult = rent.simulate({
@@ -46,8 +58,19 @@ const rentResult = rent.simulate({
   carryingCosts: buyResult.carryCosts.totalMonthlyCosts
 })
 console.log('rentResult=', rentResult)
+const refinanceResult = refinance.simulate({
+  traditionalMortgageRefinance,
+  investment: {
+    propertyPrice: traditionalMortgageLoan.propertyPrice,
+    closingCosts: buyResult.closingCosts,
+    carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
+    rehabCosts: rehabParameters.repairCosts
+  }
+})
+console.log('refinanceResult=', refinanceResult)
 console.log('\n**********\n')
 
+/*
 let result
 result = buy.simulate({ 
   hardMoneyLoan,
@@ -59,3 +82,5 @@ result = rehab.simulate({
   propertyPrice: hardMoneyLoan.propertyPrice,
   repairCosts: 25000
 })
+
+*/
