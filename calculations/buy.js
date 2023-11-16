@@ -1,13 +1,13 @@
 /**
  * Calculate the total investment.
- * @param {number} PP - Purchase Price
- * @param {number} R - Rehabilitation Costs
- * @param {number} C - Closing Costs
- * @param {number} CC - Carrying Costs
+ * @param {number} purchasePrice - Purchase Price
+ * @param {number} rehabilitationCosts - Rehabilitation Costs
+ * @param {number} closingCosts - Closing Costs
+ * @param {number} carryingCosts - Carrying Costs
  * @returns {number} Total Investment
  */
-function calculateTotalInvestment(PP, R, C, CC) {
-  return PP + R + C + CC;
+ function calculateTotalInvestment(purchasePrice, rehabilitationCosts, closingCosts, carryingCosts) {
+  return purchasePrice + rehabilitationCosts + closingCosts + carryingCosts;
 }
 
 module.exports = {
