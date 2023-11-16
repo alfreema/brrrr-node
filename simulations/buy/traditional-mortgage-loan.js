@@ -15,7 +15,7 @@ const simulate = ({ propertyPrice, downPaymentPercentage, loanTermYears, annualI
   const closingCosts = propertyPrice * (closingCostRate / 100);
   const monthlyPayment = calculateMonthlyPayment(loanAmount, annualInterestRate, loanTermYears);
 
-  console.log("Property Purchase Simulation:");
+  console.log("Property Purchase Simulation with Traditional Mortgage Loan:");
   console.log(`Property Price: $${propertyPrice}`);
   console.log(`Down Payment: $${downPayment}`);
   console.log(`Loan Amount: $${loanAmount}`);
