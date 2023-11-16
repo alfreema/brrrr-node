@@ -1,5 +1,6 @@
 const buy = require('./simulations/buy.js');
 const rehab = require('./simulations/rehab.js');
+const rent = require('./simulations/rent.js');
 
 const propertyOwnershipRates = {
   propertyTaxRate: 1.2, // 1.2% property tax rate
@@ -23,20 +24,31 @@ const hardMoneyLoan = {
   closingCostRate: 3 // 3% closing cost rate
 }
 
-let result
+const cashflowParameters = {
+  monthlyRent: 2000,                   // Example monthly rent amount
+  propertyManagementRate: 8,          // Example property management rate as a percentage
+  vacancyRate: 5                      // Example vacancy rate as a percentage
+};
 
-result = buy.simulate({ 
+const buyResult = buy.simulate({ 
   traditionalMortgageLoan,
   propertyOwnershipRates
 })
-console.log('result=', result)
-result = rehab.simulate({ 
+console.log('buyResult=', buyResult)
+const rehabResult = rehab.simulate({ 
   afterRepairValue: 240000,
   propertyPrice: traditionalMortgageLoan.propertyPrice,
   repairCosts: 25000
 })
+console.log('rehabResult=', rehabResult)
+const rentResult = rent.simulate({
+  ...cashflowParameters,
+  carryingCosts: buyResult.carryCosts.totalMonthlyCosts
+})
+console.log('rentResult=', rentResult)
 console.log('\n**********\n')
 
+let result
 result = buy.simulate({ 
   hardMoneyLoan,
   propertyOwnershipRates
