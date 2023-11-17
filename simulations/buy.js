@@ -13,6 +13,8 @@ const purchase = (lib, terms, propertyOwnershipRates) => {
 const simulate = financeDetails => {
   if(financeDetails?.traditionalMortgageLoan) {
     return purchase('./buy/traditional-mortgage-loan.js', financeDetails.traditionalMortgageLoan, financeDetails.propertyOwnershipRates)
+  } else if(financeDetails?.cashPurchase) {
+    return purchase('./buy/cash-purchase.js', financeDetails.cashPurchase, financeDetails.propertyOwnershipRates)
   } else if(financeDetails?.hardMoneyLoan) {
    return purchase('./buy/hard-money-loan.js', financeDetails.hardMoneyLoan, financeDetails.propertyOwnershipRates)
   }

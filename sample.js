@@ -25,6 +25,11 @@ const hardMoneyLoan = {
   closingCostRate: 3 // 3% closing cost rate
 }
 
+const cashPurchase = {
+  propertyPrice: 200000, // Replace with the actual property price
+  closingCostRate: 1 // 1% closing cost rate
+}
+
 const rehabParameters = {
   afterRepairValue: 280000,
   repairCosts: 25000
@@ -42,6 +47,7 @@ const traditionalMortgageRefinance = {
   carryDuration: 6              // In months
 };
 
+/*
 const buyResult = buy.simulate({ 
   traditionalMortgageLoan,
   propertyOwnershipRates
@@ -59,6 +65,11 @@ console.info("Monthly Property Tax:", buyResult.carryCosts.monthlyPropertyTax.to
 console.info("Monthly Homeowners Insurance:", buyResult.carryCosts.monthlyInsurance.toFixed(2));
 console.info("Monthly Maintenance Cost:", buyResult.carryCosts.monthlyMaintenance.toFixed(2));
 console.info("Total Monthly Costs:", buyResult.carryCosts.totalMonthlyCosts.toFixed(2));
+*/
+const buyResult = buy.simulate({ 
+  cashPurchase,
+  propertyOwnershipRates
+})
 console.log('buyResult=', buyResult, '\n\n')
 
 const rehabResult = rehab.simulate({ 
