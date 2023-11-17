@@ -10,15 +10,15 @@ const simulate = ({ propertyPrice, loanToValueRatio, interestRate, loanTermMonth
   const closingCosts = propertyPrice * (closingCostRate / 100);
   const monthlyPayment = calculateInterestOnlyPayment(loanAmount, interestRate);
   const totalRepayment = monthlyPayment * loanTermMonths;
-  console.log("Property Purchase Simulation with Hard Money Loan:");
-  console.log(`Property Price: $${propertyPrice}`);
-  console.log(`Loan Amount: $${loanAmount}`);
-  console.log(`Loan-to-Value Ratio: ${loanToValueRatio}%`);
-  console.log(`Interest Rate: ${interestRate}% per annum`);
-  console.log(`Loan Term: ${loanTermMonths} months`);
-  console.log(`Estimated Closing Costs: $${closingCosts}`);
-  console.log(`Total Repayment: $${totalRepayment.toFixed(2)}`);
-  console.log(`Monthly Payment: $${monthlyPayment.toFixed(2)}`);
+  console.info("Property Purchase Simulation with Hard Money Loan:");
+  console.info(`Property Price: $${propertyPrice}`);
+  console.info(`Loan Amount: $${loanAmount}`);
+  console.info(`Loan-to-Value Ratio: ${loanToValueRatio}%`);
+  console.info(`Interest Rate: ${interestRate}% per annum`);
+  console.info(`Loan Term: ${loanTermMonths} months`);
+  console.info(`Estimated Closing Costs: $${closingCosts}`);
+  console.info(`Total Repayment: $${totalRepayment.toFixed(2)}`);
+  console.info(`Monthly Payment: $${monthlyPayment.toFixed(2)}`);
   return {
     monthlyPayment,
     closingCosts

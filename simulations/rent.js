@@ -11,12 +11,12 @@ function simulate({
   const propertyManagementAmount = percentage.percentageAmount(monthlyRent, propertyManagementRate);
   const netMonthlyIncome = monthlyRent - (vacancyAmount + propertyManagementAmount + carryingCosts);
 
-  console.log("Property Cash Flow Simulation:");
-  console.log(`Monthly Rent: $${monthlyRent}`);
-  console.log(`Vacancy Costs: $${vacancyAmount}`);
-  console.log(`Property Management Costs: $${propertyManagementAmount}`);
-  console.log(`Carrying Costs: $${carryingCosts}`);
-  console.log(`Total Monthly Cash Flow: $${netMonthlyIncome.toFixed(2)}`);
+  console.info("Property Cash Flow Simulation:");
+  console.info(`Monthly Rent: $${monthlyRent}`);
+  console.info(`Vacancy Costs: $${vacancyAmount}`);
+  console.info(`Property Management Costs: $${propertyManagementAmount}`);
+  console.info(`Carrying Costs: $${carryingCosts}`);
+  console.info(`Total Monthly Cash Flow: $${netMonthlyIncome.toFixed(2)}`);
 
   return {
     monthlyCashFlow: netMonthlyIncome, 
