@@ -26,18 +26,17 @@ const hardMoneyLoan = {
 }
 
 const rehabParameters = {
-  afterRepairValue: 240000,
+  afterRepairValue: 280000,
   repairCosts: 25000
 }
 
 const cashflowParameters = {
-  monthlyRent: 2000,                   // Example monthly rent amount
+  monthlyRent: 1100,                   // Example monthly rent amount
   propertyManagementRate: 8,          // Example property management rate as a percentage
   vacancyRate: 5                      // Example vacancy rate as a percentage
 };
 
 const traditionalMortgageRefinance = {
-  afterRepairValue: 280000,     // Example After Repair Value
   loanToValue: 70,              // Example Loan-to-Value ratio
   refinanceCostRate: 3,         // Example Refinancing Costs
   carryDuration: 6              // In months
@@ -47,19 +46,25 @@ const buyResult = buy.simulate({
   traditionalMortgageLoan,
   propertyOwnershipRates
 })
-console.log('buyResult=', buyResult)
+console.log('buyResult=', buyResult, '\n\n')
+
 const rehabResult = rehab.simulate({ 
   ...rehabParameters,
   propertyPrice: traditionalMortgageLoan.propertyPrice
 })
-console.log('rehabResult=', rehabResult)
+console.log('rehabResult=', rehabResult, '\n\n')
+
 const rentResult = rent.simulate({
   ...cashflowParameters,
   carryingCosts: buyResult.carryCosts.totalMonthlyCosts
 })
-console.log('rentResult=', rentResult)
+console.log('rentResult=', rentResult, '\n\n')
+
 const refinanceResult = refinance.simulate({
-  traditionalMortgageRefinance,
+  traditionalMortgageRefinance: {
+    ...traditionalMortgageRefinance,
+    afterRepairValue: rehabParameters.afterRepairValue
+  },
   investment: {
     propertyPrice: traditionalMortgageLoan.propertyPrice,
     closingCosts: buyResult.closingCosts,
@@ -67,20 +72,4 @@ const refinanceResult = refinance.simulate({
     rehabCosts: rehabParameters.repairCosts
   }
 })
-console.log('refinanceResult=', refinanceResult)
-console.log('\n**********\n')
-
-/*
-let result
-result = buy.simulate({ 
-  hardMoneyLoan,
-  propertyOwnershipRates
-})
-console.log('result=', result)
-result = rehab.simulate({ 
-  afterRepairValue: 240000,
-  propertyPrice: hardMoneyLoan.propertyPrice,
-  repairCosts: 25000
-})
-
-*/
+console.log('refinanceResult=', refinanceResult, '\n\n')

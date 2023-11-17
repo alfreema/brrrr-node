@@ -19,6 +19,7 @@ function simulate({
   console.log(`Total Monthly Cash Flow: $${netMonthlyIncome.toFixed(2)}`);
 
   return {
+    monthlyCashFlow: netMonthlyIncome, 
     annualCashFlow: netMonthlyIncome * 12 // Convert monthly cash flow to annual
   };
 }

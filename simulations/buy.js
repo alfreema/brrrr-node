@@ -1,7 +1,6 @@
 const purchase = (lib, terms, propertyOwnershipRates) => {
   const buyLib = require(lib)
   const purchase = buyLib.simulate(terms)
-  console.log('')
   const carryCostsLib = require('./buy/carrying-costs.js')
   purchase.carryCosts = carryCostsLib.simulate({
     propertyPrice: terms.propertyPrice,
