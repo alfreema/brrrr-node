@@ -20,6 +20,8 @@ const simulate = ({ propertyPrice, loanToValueRatio, interestRate, loanTermMonth
   console.info(`Total Repayment: $${totalRepayment.toFixed(2)}`);
   console.info(`Monthly Payment: $${monthlyPayment.toFixed(2)}`);
   return {
+    loanAmount,
+    totalRepayment,
     monthlyPayment,
     closingCosts
   };

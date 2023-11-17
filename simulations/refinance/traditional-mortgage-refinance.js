@@ -40,17 +40,8 @@ function simulate({ afterRepairValue, loanToValue, refinanceCostRate, carryDurat
   const loanAmountBeforeRefi = calculateLoanAmountBeforeRefi(afterRepairValue, loanToValue);
   const loanAmountAfterRefi = calculateLoanAmountAfterRefi(loanAmountBeforeRefi, refinanceCostRate);
   const cashOutRefinance = calculateCashOutRefinance(loanAmountAfterRefi, totalInvestment);
-
-  console.info("Loan and Refinance Simulation:");
-  console.info(`After Repair Value: $${afterRepairValue}`);
-  console.info(`Loan-to-Value Ratio: ${loanToValue}%`);
-  console.info(`Refinancing Costs Rate: ${refinanceCostRate}%`);
-  console.info(`Total Investment: $${totalInvestment}`);
-  console.info(`Loan Amount Before Refinance: $${loanAmountBeforeRefi.toFixed(2)}`);
-  console.info(`Loan Amount After Refinance: $${loanAmountAfterRefi.toFixed(2)}`);
-  console.info(`Cash Out Refinance: $${cashOutRefinance.toFixed(2)}`);
-
   return {
+    totalInvestment,
     loanAmountBeforeRefi,
     loanAmountAfterRefi,
     cashOutRefinance

@@ -49,6 +49,8 @@ describe('Simulation Tests', () => {
       refinanceResult
   test('buy simulation', () => {
     const expectedBuyResult = {
+      downPayment: 32000,
+      loanAmount: 128000,
       monthlyPayment: 648.5571965771337,
       closingCosts: 4000,
       carryCosts: {
@@ -79,6 +81,8 @@ describe('Simulation Tests', () => {
 
   test('rent simulation', () => {
     const expectedRentResult = {
+      vacancyAmount: 55,
+      propertyManagementAmount: 88,
       monthlyCashFlow: 41.776136756199776,
       annualCashFlow: 501.3136410743973
     }
@@ -91,6 +95,7 @@ describe('Simulation Tests', () => {
 
   test('refinance simulation', () => {
     const expectedRefinanceResult = {
+      totalInvestment: 194491.3431794628,
       loanAmountBeforeRefi: 196000,
       loanAmountAfterRefi: 201880,
       cashOutRefinance: 7388.656820537202

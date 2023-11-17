@@ -46,18 +46,41 @@ const buyResult = buy.simulate({
   traditionalMortgageLoan,
   propertyOwnershipRates
 })
+console.info("Property Purchase Simulation with Traditional Mortgage Loan:");
+console.info(`Property Price: $${traditionalMortgageLoan.propertyPrice}`);
+console.info(`Down Payment: $${buyResult.downPayment}`);
+console.info(`Loan Amount: $${buyResult.loanAmount}`);
+console.info(`Loan Term: ${traditionalMortgageLoan.loanTermYears} years`);
+console.info(`Annual Interest Rate: ${traditionalMortgageLoan.annualInterestRate}%`);
+console.info(`Estimated Closing Costs: $${buyResult.closingCosts}`);
+console.info(`Monthly Mortgage Payment: $${buyResult.monthlyPayment.toFixed(2)}`);
+console.info("Property Carrying Costs Simulation:");
+console.info("Monthly Property Tax:", buyResult.carryCosts.monthlyPropertyTax.toFixed(2));
+console.info("Monthly Homeowners Insurance:", buyResult.carryCosts.monthlyInsurance.toFixed(2));
+console.info("Monthly Maintenance Cost:", buyResult.carryCosts.monthlyMaintenance.toFixed(2));
+console.info("Total Monthly Costs:", buyResult.carryCosts.totalMonthlyCosts.toFixed(2));
 console.log('buyResult=', buyResult, '\n\n')
 
 const rehabResult = rehab.simulate({ 
   ...rehabParameters,
   propertyPrice: traditionalMortgageLoan.propertyPrice
 })
+console.info("Property Rehab Simulation:");
+console.info(`After Repair Value: $${rehabParameters.afterRepairValue}`);
+console.info(`Repair Costs: $${rehabParameters.repairCosts}`);
+console.info("Total Equity After Rehab:", rehabResult.equity.toFixed(2));
 console.log('rehabResult=', rehabResult, '\n\n')
 
 const rentResult = rent.simulate({
   ...cashflowParameters,
   carryingCosts: buyResult.carryCosts.totalMonthlyCosts
 })
+console.info("Property Cash Flow Simulation:");
+console.info(`Monthly Rent: $${cashflowParameters.monthlyRent}`);
+console.info(`Vacancy Costs: $${rentResult.vacancyAmount}`);
+console.info(`Property Management Costs: $${rentResult.propertyManagementAmount}`);
+console.info(`Carrying Costs: $${buyResult.carryCosts.totalMonthlyCosts}`);
+console.info(`Total Monthly Cash Flow: $${rentResult.monthlyCashFlow.toFixed(2)}`);
 console.log('rentResult=', rentResult, '\n\n')
 
 const refinanceResult = refinance.simulate({
@@ -72,4 +95,12 @@ const refinanceResult = refinance.simulate({
     rehabCosts: rehabParameters.repairCosts
   }
 })
+console.info("Loan and Refinance Simulation:");
+console.info(`After Repair Value: $${rehabParameters.afterRepairValue}`);
+console.info(`Loan-to-Value Ratio: ${traditionalMortgageRefinance.loanToValue}%`);
+console.info(`Refinancing Costs Rate: ${traditionalMortgageRefinance.refinanceCostRate}%`);
+console.info(`Total Investment: $${refinanceResult.totalInvestment}`);
+console.info(`Loan Amount Before Refinance: $${refinanceResult.loanAmountBeforeRefi.toFixed(2)}`);
+console.info(`Loan Amount After Refinance: $${refinanceResult.loanAmountAfterRefi.toFixed(2)}`);
+console.info(`Cash Out Refinance: $${refinanceResult.cashOutRefinance.toFixed(2)}`);
 console.log('refinanceResult=', refinanceResult, '\n\n')
