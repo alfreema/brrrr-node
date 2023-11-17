@@ -1,19 +1,13 @@
-const brrrr = require('./calculations/brrrr');
-
-const buy = require('./calculations/buy');
-const rehab = require('./calculations/rehab');
-const rent = require('./calculations/rent');
-const refinance = require('./calculations/refinance');
-
-const analyze = require('./calculations/analyze');
+const buy = require('./simulations/buy');
+const rehab = require('./simulations/rehab');
+const rent = require('./simulations/rent');
+const refinance = require('./simulations/refinance');
 const percentage = require('./math/percentage');
 
 module.exports = {
-  calculate: brrrr.calculate,
   buy,
   rehab,
   rent,
   refinance,
-  analyze,
   percentage
 };
