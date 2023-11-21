@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../testapp"
+		},
+		{
+			"path": "../brrrrp-element"
 		}
 	],
 	"settings": {}
