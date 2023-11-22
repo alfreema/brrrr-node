@@ -1,6 +1,4 @@
-//const path = require('path');
-const path = typeof window === 'undefined' ? require('path-browserify') : require('path');
-
+const path = require('path-browserify');
 
 const purchase = (lib, terms, propertyOwnershipRates) => {
   const buyLib = require(lib)
