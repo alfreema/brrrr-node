@@ -5,7 +5,19 @@ const joinPath = (...paths) => {
     return path.join(...paths);
   } else {
     // Browser environment
-    return paths.join('/');
+    if (typeof require !== 'undefined') {
+      try {
+        // Attempt to use 'path' module
+        const path = require('path');
+        return path.join(...paths);
+      } catch (error) {
+        // If 'path' module is not available, use '/'
+        return paths.join('/');
+      }
+    } else {
+      // If 'require' is not defined, use '/'
+      return paths.join('/');
+    }
   }
 };
 
