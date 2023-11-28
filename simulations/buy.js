@@ -13,6 +13,7 @@ const purchase = (lib, terms, propertyOwnershipRates) => {
 }
 
 const simulate = financeDetails => {
+  console.log('__dirname=', __dirname)
   if(financeDetails?.traditionalMortgageLoan) {
     return purchase(path.join(__dirname, 'buy/traditional-mortgage-loan.js'), financeDetails.traditionalMortgageLoan, financeDetails.propertyOwnershipRates)
   } else if(financeDetails?.cashPurchase) {
