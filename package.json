@@ -12,7 +12,6 @@
   "author": "Aaron Freeman",
   "license": "ISC",
   "dependencies": {
-    "jest": "^29.7.0",
-    "path-browserify": "^1.0.1"
+    "jest": "^29.7.0"
   }
 }
