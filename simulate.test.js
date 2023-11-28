@@ -1,8 +1,10 @@
+const brrrrNode = require('./index.js')
+/*
 const buy = require('./simulations/buy.js');
 const rehab = require('./simulations/rehab.js');
 const rent = require('./simulations/rent.js');
 const refinance = require('./simulations/refinance.js');
-
+*/
 const propertyOwnershipRates = {
   propertyTaxRate: 1.2, // 1.2% property tax rate
   insuranceRate: 0.5, // 0.5% homeowners insurance rate
@@ -61,7 +63,7 @@ describe('Simulation Tests', () => {
         totalMonthlyCosts: 915.2238632438003
       }
     };
-    buyResult = buy.simulate({
+    buyResult = brrrrNode.buy.simulate({
       traditionalMortgageLoan,
       propertyOwnershipRates
     });
@@ -72,7 +74,7 @@ describe('Simulation Tests', () => {
     const expectedRehabResult = {
       equity: 95000
     };
-    rehabResult = rehab.simulate({
+    rehabResult = brrrrNode.rehab.simulate({
       ...rehabParameters,
       propertyPrice: traditionalMortgageLoan.propertyPrice
     });
@@ -86,7 +88,7 @@ describe('Simulation Tests', () => {
       monthlyCashFlow: 41.776136756199776,
       annualCashFlow: 501.3136410743973
     }
-    rentResult = rent.simulate({
+    rentResult = brrrrNode.rent.simulate({
       ...cashflowParameters,
       carryingCosts: buyResult.carryCosts.totalMonthlyCosts
     });
@@ -100,7 +102,7 @@ describe('Simulation Tests', () => {
       loanAmountAfterRefi: 201880,
       cashOutRefinance: 7388.656820537202
     }
-    refinanceResult = refinance.simulate({
+    refinanceResult = brrrrNode.refinance.simulate({
       traditionalMortgageRefinance: {
         ...traditionalMortgageRefinance,
         afterRepairValue: rehabParameters.afterRepairValue
