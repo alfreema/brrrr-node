@@ -1,4 +1,4 @@
-const path = require('path-browserify');
+const path = require('path');
 
 const purchase = (lib, terms, propertyOwnershipRates) => {
   const buyLib = require(lib)

@@ -10,11 +10,11 @@ const propertyOwnershipRates = {
 };
 
 const traditionalMortgageLoan = { 
-  propertyPrice: 160000, // Replace with the actual property price
+  propertyPrice: 200000, // Replace with the actual property price
   downPaymentPercentage: 20, // 20% down payment
-  loanTermYears: 30, // 30-year loan term
-  annualInterestRate: 4.5, // 4.5% annual interest rate,
-  closingCostRate: 2.5 // 2.5% closing cost rate
+  loanTermYears: 20, // 30-year loan term
+  annualInterestRate: 8, // 4.5% annual interest rate,
+  closingCostRate: 2 // 2.5% closing cost rate
 }
 
 const hardMoneyLoan = { 
@@ -31,23 +31,23 @@ const cashPurchase = {
 }
 
 const rehabParameters = {
-  afterRepairValue: 280000,
-  repairCosts: 25000
+  afterRepairValue: 500000,
+  repairCosts: 150000
 }
 
 const cashflowParameters = {
-  monthlyRent: 1100,                   // Example monthly rent amount
-  propertyManagementRate: 8,          // Example property management rate as a percentage
+  monthlyRent: 6000,                   // Example monthly rent amount
+  propertyManagementRate: 6,          // Example property management rate as a percentage
   vacancyRate: 5                      // Example vacancy rate as a percentage
 };
 
 const traditionalMortgageRefinance = {
   loanToValue: 70,              // Example Loan-to-Value ratio
-  refinanceCostRate: 3,         // Example Refinancing Costs
-  carryDuration: 6              // In months
+  refinanceCostRate: 8,         // Example Refinancing Costs
+  carryDuration: 9              // In months
 };
 
-/*
+
 const buyResult = buy.simulate({ 
   traditionalMortgageLoan,
   propertyOwnershipRates
@@ -65,12 +65,15 @@ console.info("Monthly Property Tax:", buyResult.carryCosts.monthlyPropertyTax.to
 console.info("Monthly Homeowners Insurance:", buyResult.carryCosts.monthlyInsurance.toFixed(2));
 console.info("Monthly Maintenance Cost:", buyResult.carryCosts.monthlyMaintenance.toFixed(2));
 console.info("Total Monthly Costs:", buyResult.carryCosts.totalMonthlyCosts.toFixed(2));
-*/
+/**/
+/*
 const buyResult = buy.simulate({ 
   cashPurchase,
   propertyOwnershipRates
 })
+*/
 console.log('buyResult=', buyResult, '\n\n')
+
 
 const rehabResult = rehab.simulate({ 
   ...rehabParameters,

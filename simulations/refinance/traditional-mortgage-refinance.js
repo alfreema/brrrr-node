@@ -26,7 +26,7 @@ function calculateLoanAmountAfterRefi(loanAmountBeforeRefi, refinanceCostRate) {
  * @returns {number} Cash Out Refinance
  */
 function calculateCashOutRefinance(LAAR, totalInvestment) {
-  return Math.max(0, LAAR - totalInvestment);
+  return LAAR - totalInvestment;
 }
 
 /**
