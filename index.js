@@ -5,6 +5,31 @@ const refinance = require('./simulations/refinance');
 const percentage = require('./math/percentage');
 
 const simulate = parameters => {
+  if(!parameters.traditionalMortgageLoan &&
+     !parameters.cashPurchase &&
+     !parameters.hardMoneyLoan
+  ) {
+    console.log('traditionalMortgageLoan, cashPurchase, or hardMoneyLoan parameter is required')
+    return null
+  }
+  if(!parameters.propertyOwnershipRates) {
+    console.log('propertyOwnershipRates is required')
+    return null
+  }
+  if(!parameters.rehabParameters) {
+    console.log('rehabParameters is required')
+    return null
+  }
+  if(!parameters.cashflowParameters) {
+    console.log('cashflowParameters is required')
+    return null
+  }
+  if(!parameters.traditionalMortgageRefinance
+  ) {
+   console.log('traditionalMortgageRefinance parameter is required')
+   return null
+ }
+ 
   const propertyPrice = parameters.traditionalMortgageLoan?.propertyPrice ?? 
                         parameters.cashPurchase?.propertyPrice ??
                         parameters.hardMoneyLoan.propertyPrice
