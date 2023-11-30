@@ -7,6 +7,7 @@ function calculateInterestOnlyPayment(loanAmount, interestRate) {
 // Function to simulate property purchase with a hard money loan
 const simulate = ({ propertyPrice, loanToValueRatio, interestRate, loanTermMonths, closingCostRate }) => {
   const loanAmount = propertyPrice * (loanToValueRatio / 100);
+  const downPayment = propertyPrice - loanAmount;
   const closingCosts = propertyPrice * (closingCostRate / 100);
   const monthlyPayment = calculateInterestOnlyPayment(loanAmount, interestRate);
   const totalRepayment = monthlyPayment * loanTermMonths;
@@ -21,6 +22,7 @@ const simulate = ({ propertyPrice, loanToValueRatio, interestRate, loanTermMonth
   console.info(`Monthly Payment: $${monthlyPayment.toFixed(2)}`);
   return {
     loanAmount,
+    downPayment,
     totalRepayment,
     monthlyPayment,
     closingCosts

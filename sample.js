@@ -10,10 +10,10 @@ const propertyOwnershipRates = {
 };
 
 const traditionalMortgageLoan = { 
-  propertyPrice: 200000, // Replace with the actual property price
+  propertyPrice: 189000, // Replace with the actual property price
   downPaymentPercentage: 20, // 20% down payment
-  loanTermYears: 20, // 30-year loan term
-  annualInterestRate: 8, // 4.5% annual interest rate,
+  loanTermYears: 30, // 30-year loan term
+  annualInterestRate: 7, // 4.5% annual interest rate,
   closingCostRate: 2 // 2.5% closing cost rate
 }
 
@@ -31,19 +31,19 @@ const cashPurchase = {
 }
 
 const rehabParameters = {
-  afterRepairValue: 500000,
-  repairCosts: 150000
+  afterRepairValue: 320000,
+  repairCosts: 100000
 }
 
 const cashflowParameters = {
-  monthlyRent: 6000,                   // Example monthly rent amount
-  propertyManagementRate: 6,          // Example property management rate as a percentage
+  monthlyRent: 1600,                   // Example monthly rent amount
+  propertyManagementRate: 7,          // Example property management rate as a percentage
   vacancyRate: 5                      // Example vacancy rate as a percentage
 };
 
 const traditionalMortgageRefinance = {
   loanToValue: 70,              // Example Loan-to-Value ratio
-  refinanceCostRate: 8,         // Example Refinancing Costs
+  refinanceCostRate: 9,         // Example Refinancing Costs
   carryDuration: 9              // In months
 };
 
@@ -52,6 +52,7 @@ const buyResult = buy.simulate({
   traditionalMortgageLoan,
   propertyOwnershipRates
 })
+
 console.info("Property Purchase Simulation with Traditional Mortgage Loan:");
 console.info(`Property Price: $${traditionalMortgageLoan.propertyPrice}`);
 console.info(`Down Payment: $${buyResult.downPayment}`);
@@ -103,8 +104,7 @@ const refinanceResult = refinance.simulate({
     afterRepairValue: rehabParameters.afterRepairValue
   },
   investment: {
-    propertyPrice: traditionalMortgageLoan.propertyPrice,
-    downPaymentPercentage: traditionalMortgageLoan.downPaymentPercentage,
+    downPayment: buyResult.downPayment,
     closingCosts: buyResult.closingCosts,
     carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
     rehabCosts: rehabParameters.repairCosts

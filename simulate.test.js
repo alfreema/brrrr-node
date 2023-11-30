@@ -108,8 +108,7 @@ describe('Simulation Tests', () => {
         afterRepairValue: rehabParameters.afterRepairValue
       },
       investment: {
-        propertyPrice: traditionalMortgageLoan.propertyPrice,
-        downPaymentPercentage: traditionalMortgageLoan.downPaymentPercentage,
+        downPayment: buyResult.downPayment,
         closingCosts: buyResult.closingCosts,
         carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
         rehabCosts: rehabParameters.repairCosts

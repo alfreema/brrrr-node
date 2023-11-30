@@ -41,14 +41,12 @@ function simulate({
     carryDuration 
   }, 
   { 
-    propertyPrice, 
-    downPaymentPercentage, 
+    downPayment, 
     closingCosts, 
     carryingCosts, 
     rehabCosts 
 }) {
-  const cashToPurchase = propertyPrice * ( downPaymentPercentage / 100 );
-  const totalInvestment = cashToPurchase + closingCosts + (carryingCosts * carryDuration) + rehabCosts;
+  const totalInvestment = downPayment + closingCosts + (carryingCosts * carryDuration) + rehabCosts;
 
   const loanAmountBeforeRefi = calculateLoanAmountBeforeRefi(afterRepairValue, loanToValue);
   const loanAmountAfterRefi = calculateLoanAmountAfterRefi(loanAmountBeforeRefi, refinanceCostRate);
