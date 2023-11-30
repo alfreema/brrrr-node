@@ -104,6 +104,7 @@ const refinanceResult = refinance.simulate({
   },
   investment: {
     propertyPrice: traditionalMortgageLoan.propertyPrice,
+    downPaymentPercentage: traditionalMortgageLoan.downPaymentPercentage,
     closingCosts: buyResult.closingCosts,
     carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
     rehabCosts: rehabParameters.repairCosts

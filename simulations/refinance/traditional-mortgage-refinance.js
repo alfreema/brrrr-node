@@ -34,8 +34,21 @@ function calculateCashOutRefinance(LAAR, totalInvestment) {
  * @param {object} params - Simulation parameters
  * @returns {object} Simulation result
  */
-function simulate({ afterRepairValue, loanToValue, refinanceCostRate, carryDuration }, { propertyPrice, closingCosts, carryingCosts, rehabCosts }) {
-  const totalInvestment = propertyPrice + closingCosts + (carryingCosts * carryDuration) + rehabCosts;
+function simulate({ 
+    afterRepairValue, 
+    loanToValue, 
+    refinanceCostRate, 
+    carryDuration 
+  }, 
+  { 
+    propertyPrice, 
+    downPaymentPercentage, 
+    closingCosts, 
+    carryingCosts, 
+    rehabCosts 
+}) {
+  const cashToPurchase = propertyPrice * ( downPaymentPercentage / 100 );
+  const totalInvestment = cashToPurchase + closingCosts + (carryingCosts * carryDuration) + rehabCosts;
 
   const loanAmountBeforeRefi = calculateLoanAmountBeforeRefi(afterRepairValue, loanToValue);
   const loanAmountAfterRefi = calculateLoanAmountAfterRefi(loanAmountBeforeRefi, refinanceCostRate);
