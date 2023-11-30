@@ -33,6 +33,9 @@ const simulate = parameters => {
   const propertyPrice = parameters.traditionalMortgageLoan?.propertyPrice ?? 
                         parameters.cashPurchase?.propertyPrice ??
                         parameters.hardMoneyLoan.propertyPrice
+  const downPaymentPercentage = parameters.traditionalMortgageLoan?.propertyPrice * ( 100 / parameters.traditionalMortgageLoan?.downPaymentPercentage) ?? 
+                        parameters.cashPurchase?.propertyPrice ??
+                        parameters.hardMoneyLoan.propertyPrice * (100 / ( 100 - parameters.hardMoneyLoan.loanToValueRatio))
 
   const buyResult = buy.simulate({ 
     ...(parameters.traditionalMortgageLoan && { traditionalMortgageLoan: parameters.traditionalMortgageLoan }),
@@ -49,6 +52,7 @@ const simulate = parameters => {
     ...parameters.cashflowParameters,
     carryingCosts: buyResult.carryCosts.totalMonthlyCosts
   })
+  
   const refinanceResult = refinance.simulate({
     ...(parameters.traditionalMortgageRefinance && { 
       traditionalMortgageRefinance: {
@@ -58,6 +62,7 @@ const simulate = parameters => {
     }),
     investment: {
       propertyPrice,
+      downPaymentPercentage,
       closingCosts: buyResult.closingCosts,
       carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
       rehabCosts: parameters.rehabParameters.repairCosts

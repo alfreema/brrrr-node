@@ -97,10 +97,10 @@ describe('Simulation Tests', () => {
 
   test('refinance simulation', () => {
     const expectedRefinanceResult = {
-      totalInvestment: 194491.3431794628,
+      totalInvestment: 66491.3431794628,
       loanAmountBeforeRefi: 196000,
       loanAmountAfterRefi: 201880,
-      cashOutRefinance: 7388.656820537202
+      cashOutRefinance: 135388.6568205372
     }
     refinanceResult = brrrrNode.refinance.simulate({
       traditionalMortgageRefinance: {
@@ -109,6 +109,7 @@ describe('Simulation Tests', () => {
       },
       investment: {
         propertyPrice: traditionalMortgageLoan.propertyPrice,
+        downPaymentPercentage: traditionalMortgageLoan.downPaymentPercentage,
         closingCosts: buyResult.closingCosts,
         carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
         rehabCosts: rehabParameters.repairCosts
