@@ -31,12 +31,13 @@ const cashPurchase = {
 }
 
 const rehabParameters = {
-  afterRepairValue: 320000,
-  repairCosts: 100000
+  afterRepairValue: 290000,
+  repairCosts: 100000,
+  monthsToCompleteRepairs: 9
 }
 
-const cashflowParameters = {
-  monthlyRent: 1600,                   // Example monthly rent amount
+const rentParameters = {
+  monthlyRent: 1700,                   // Example monthly rent amount
   propertyManagementRate: 7,          // Example property management rate as a percentage
   vacancyRate: 5                      // Example vacancy rate as a percentage
 };
@@ -44,7 +45,8 @@ const cashflowParameters = {
 const traditionalMortgageRefinance = {
   loanToValue: 70,              // Example Loan-to-Value ratio
   refinanceCostRate: 9,         // Example Refinancing Costs
-  carryDuration: 9              // In months
+  carryDuration: 12,              // In months
+  annualInterestRate: 8,        // 4.5% annual interest rate,
 };
 
 
@@ -53,27 +55,22 @@ const buyResult = buy.simulate({
   propertyOwnershipRates
 })
 
-console.info("Property Purchase Simulation with Traditional Mortgage Loan:");
+console.info("Property Purchase Simulation");
 console.info(`Property Price: $${traditionalMortgageLoan.propertyPrice}`);
 console.info(`Down Payment: $${buyResult.downPayment}`);
 console.info(`Loan Amount: $${buyResult.loanAmount}`);
 console.info(`Loan Term: ${traditionalMortgageLoan.loanTermYears} years`);
 console.info(`Annual Interest Rate: ${traditionalMortgageLoan.annualInterestRate}%`);
 console.info(`Estimated Closing Costs: $${buyResult.closingCosts}`);
-console.info(`Monthly Mortgage Payment: $${buyResult.monthlyPayment.toFixed(2)}`);
+console.info(`Monthly Mortgage Payment: $${buyResult.monthlyPayment.toFixed(2)}\n`);
+
 console.info("Property Carrying Costs Simulation:");
 console.info("Monthly Property Tax:", buyResult.carryCosts.monthlyPropertyTax.toFixed(2));
 console.info("Monthly Homeowners Insurance:", buyResult.carryCosts.monthlyInsurance.toFixed(2));
 console.info("Monthly Maintenance Cost:", buyResult.carryCosts.monthlyMaintenance.toFixed(2));
 console.info("Total Monthly Costs:", buyResult.carryCosts.totalMonthlyCosts.toFixed(2));
-/**/
-/*
-const buyResult = buy.simulate({ 
-  cashPurchase,
-  propertyOwnershipRates
-})
-*/
-console.log('buyResult=', buyResult, '\n\n')
+
+console.log('\nbuyResult=', buyResult, '\n\n')
 
 
 const rehabResult = rehab.simulate({ 
@@ -84,14 +81,15 @@ console.info("Property Rehab Simulation:");
 console.info(`After Repair Value: $${rehabParameters.afterRepairValue}`);
 console.info(`Repair Costs: $${rehabParameters.repairCosts}`);
 console.info("Total Equity After Rehab:", rehabResult.equity.toFixed(2));
-console.log('rehabResult=', rehabResult, '\n\n')
+
+console.log('\nrehabResult=', rehabResult, '\n\n')
 
 const rentResult = rent.simulate({
-  ...cashflowParameters,
+  ...rentParameters,
   carryingCosts: buyResult.carryCosts.totalMonthlyCosts
 })
-console.info("Property Cash Flow Simulation:");
-console.info(`Monthly Rent: $${cashflowParameters.monthlyRent}`);
+console.info("Property Rent Simulation:");
+console.info(`Monthly Rent: $${rentParameters.monthlyRent}`);
 console.info(`Vacancy Costs: $${rentResult.vacancyAmount}`);
 console.info(`Property Management Costs: $${rentResult.propertyManagementAmount}`);
 console.info(`Carrying Costs: $${buyResult.carryCosts.totalMonthlyCosts}`);

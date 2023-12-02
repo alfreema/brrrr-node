@@ -1,8 +1,9 @@
 // Function to calculate overall monthly carrying costs
-function simulate({ afterRepairValue, propertyPrice, repairCosts }) {
+function simulate({ afterRepairValue, propertyPrice, repairCosts, monthsToCompleteRepairs }) {
   const equity = afterRepairValue - (propertyPrice + repairCosts);
   return {
-    equity
+    equity,
+    monthsToCompleteRepairs
   };
 }
 
