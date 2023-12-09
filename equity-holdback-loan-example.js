@@ -1,3 +1,5 @@
+// Based on the description found here:  https://www.youtube.com/watch?v=R7efrjnC95Y
+
 const { simulate } = require('./index.js');
 
 const strategy = {
@@ -9,17 +11,18 @@ const strategy = {
       maintenanceRate: 0.3
     },
     loan: {
-      type: 'buyAndRehabHardMoneyLoan',
+      type: 'equityHoldbackHardMoneyLoan',
       loanToValueRatio: 80,
       interestRate: 9,
       loanTermMonths: 12,
-      closingCostRate: 2
+      closingCostRate: 2,
+      equityHoldbackLoanToValueRatio: 79
     }
   },
   rehab: {
     afterRepairValue: 225000,
     repairCosts: 60000,
-    monthsToCompleteRepairs: 1
+    monthsToCompleteRepairs: 4
   },
   rent: {
     monthlyRent: 2100,
@@ -29,8 +32,8 @@ const strategy = {
   refinance: {
     loan: {
       type: 'debtServiceCoverageRatioLoan',
-      loanToValueRatio: 75,
-      interestRate: 9,
+      loanToValueRatio: 79,
+      interestRate: 8,
       loanTermMonths: 12*30,
       closingCostRate: 2
     }

@@ -3,9 +3,10 @@ const conventionalLoanLib = require('../lending/conventional-loan.js')
 const cashPurchaseLib = require('../lending/cash-purchase.js')
 const hardMoneyLoanLib = require('../lending/hard-money-loan.js')
 const homestyleLoanLib = require('../lending/homestyle-loan.js')
+const equityHoldbackHardMoneyLoanLib = require('../lending/equity-holdback-hard-money-loan.js')
 
 const purchase = (lib, strategy) => {
-  const purchase = lib.simulate(strategy.buy.property.price, strategy.buy.loan, strategy.rehab.repairCosts)
+  const purchase = lib.simulate(strategy.buy.property.price, strategy.buy.loan, strategy.rehab.repairCosts, strategy.rehab.afterRepairValue)
   const carryCostsLib = require('../lending/carrying-costs.js')
   purchase.carryCosts = carryCostsLib.simulate(
     strategy.buy.property.price,
@@ -19,6 +20,7 @@ const purchase = (lib, strategy) => {
 
 const strategyToLibraryMap = {
   buyAndRehabHardMoneyLoan: buyAndRehabHardMoneyLoanLib,
+  equityHoldbackHardMoneyLoan: equityHoldbackHardMoneyLoanLib,
   conventionalLoan: conventionalLoanLib,
   cashPurchase: cashPurchaseLib,
   hardMoneyLoan: hardMoneyLoanLib,
@@ -64,15 +66,12 @@ const validate = strategy => {
     console.error(error)
     throw new Error(error)
   }
-  if(!strategy.buy.loan.type == 'buyAndRehabHardMoneyLoan' &&
-    !strategy.buy.loan.type == 'conventionalLoan' &&
-    !strategy.buy.loan.type == 'cashPurchase' &&
-    !strategy.buy.loan.type == 'hardMoneyLoan'
-  ) {
-    const error = '"strategy.buy.loan.type" must be one of: "buyAndRehabHardMoneyLoan", "conventionalLoan", "cashPurchase", or "hardMoneyLoan"'
+  const validLoanTypes = ['buyAndRehabHardMoneyLoan', 'equityHoldbackHardMoneyLoan', 'conventionalLoan', 'cashPurchase', 'hardMoneyLoan']
+  if(!validLoanTypes.includes(strategy.buy.loan.type)) {
+    const error = `"strategy.buy.loan.type" must be one of: ${validLoanTypes}`
     console.error(error)
     throw new Error(error)
-  }
+  }  
 }
 
 module.exports = {

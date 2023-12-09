@@ -7,7 +7,7 @@ function simulate(strategy) {
                               carryCostsDuringRehab -
                               incomeAfterRehab +
                               strategy.refinance.loan.closingCosts;
-  const cashOut = strategy.refinance.loan.loanAmount - strategy.buy.loan.loanAmount - totalCashInvestment;
+  const cashOut = strategy.refinance.loan.loanAmount - strategy.buy.loan.loanAmount - totalCashInvestment + strategy.buy.loan.equityHoldback;
   strategy.repeat.cash = {
     purchaseLoanCosts,
     carryCostsDuringRehab,

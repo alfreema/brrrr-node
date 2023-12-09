@@ -19,7 +19,7 @@ const strategy = {
   rehab: {
     afterRepairValue: 225000,
     repairCosts: 60000,
-    monthsToCompleteRepairs: 1
+    monthsToCompleteRepairs: 4
   },
   rent: {
     monthlyRent: 2100,

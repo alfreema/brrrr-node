@@ -6,12 +6,9 @@
  * @param {*} repairCosts (Optional) If this is included, it's assumed that the initial loan will cover both 'buy' and 'rehab' totals
  * @returns 
  */
-const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonths, closingCostRate }, repairCosts = null ) => {
-  if(repairCosts) {
-    purchasePrice += repairCosts
-  }
-  const loanAmount = purchasePrice * (loanToValueRatio / 100);
-  const downPayment = purchasePrice - loanAmount;
+const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonths, closingCostRate }, repairCosts = 0 ) => {
+  const downPayment = purchasePrice * ((100 - loanToValueRatio) / 100);
+  const loanAmount = purchasePrice - downPayment + repairCosts;
   const closingCosts = purchasePrice * (closingCostRate / 100);
   const monthlyPayment = loanAmount * (interestRate / 12 / 100);
   const totalRepayment = monthlyPayment * loanTermMonths;
@@ -20,7 +17,8 @@ const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonth
     downPayment,
     totalRepayment,
     monthlyPayment,
-    closingCosts
+    closingCosts,
+    equityHoldback: 0
   };
 }
 
