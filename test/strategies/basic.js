@@ -32,6 +32,8 @@ const strategy = {
       loanTermMonths: 12*30,
       closingCostRate: 2
     }
+  },
+  repeat: {
   }
 };
 

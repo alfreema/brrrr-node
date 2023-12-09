@@ -1,15 +1,5 @@
 function simulate(strategy) {
   // validate(strategy)
-  console.log(
-    strategy.buy.loan.downPayment, 
-    strategy.buy.loan.closingCosts,
-    strategy.buy.carryCosts.totalMonthlyCosts,
-    strategy.rehab.monthsToCompleteRepairs,
-    strategy.buy.loan.loanTermMonths, 
-    strategy.rehab.monthsToCompleteRepairs,
-    strategy.rent.monthlyCashFlowUntilRefinance,
-    strategy.refinance.loan.closingCosts
-  )
   const purchaseLoanCosts = strategy.buy.loan.downPayment + strategy.buy.loan.closingCosts;
   const carryCostsDuringRehab = strategy.buy.carryCosts.totalMonthlyCosts * strategy.rehab.monthsToCompleteRepairs
   const incomeAfterRehab = (Math.max(strategy.buy.loan.loanTermMonths - strategy.rehab.monthsToCompleteRepairs, 0) * strategy.rent.monthlyCashFlowUntilRefinance)
@@ -18,11 +8,18 @@ function simulate(strategy) {
                               incomeAfterRehab +
                               strategy.refinance.loan.closingCosts;
   const cashOut = strategy.refinance.loan.loanAmount - strategy.buy.loan.loanAmount - totalCashInvestment;
-  strategy.repeat.purchaseLoanCosts = purchaseLoanCosts;
-  strategy.repeat.carryCostsDuringRehab = carryCostsDuringRehab;
-  strategy.repeat.incomeAfterRehab = incomeAfterRehab;
-  strategy.repeat.totalCashInvestment = totalCashInvestment;
-  strategy.repeat.cashOut = cashOut;
+  strategy.repeat.cash = {
+    purchaseLoanCosts,
+    carryCostsDuringRehab,
+    incomeAfterRehab,
+    totalCashInvestment,
+    cashOut
+  }
+  const monthlyCashflow = strategy.rent.monthlyRent - strategy.refinance.loan.totalDebtService
+  strategy.repeat.cashflow = {
+    monthlyCashflow,
+    annualCashflow: monthlyCashflow * 12
+  }
   return strategy;
 }
 
