@@ -1,24 +1,82 @@
-const traditionalMortgageRefinanceLib = require('./refinance/traditional-mortgage-refinance.js')
-// const commercialLoanLib = require('./refinance/commercial-loan.js')
+const conventionalLoanLib = require('../lending/conventional-loan.js')
+const debtServiceCoverageRatioLoanLib = require('../lending/debt-service-coverage-ratio-loan.js')
 
-const refinance = (lib, terms, investment) => {
-  return lib.simulate(terms, investment)
+const refinance = (lib, strategy) => {
+  // Need to calculate expenses first
+  const carryCostsLib = require('../lending/carrying-costs.js')
+  let carryCosts = carryCostsLib.simulate(
+    strategy.rehab.afterRepairValue,
+    {
+      ...strategy,
+      monthlyLoanPayment: 0
+    }
+  )
+  const refinance = lib.simulate(
+    strategy.rehab.afterRepairValue, 
+    strategy.refinance.loan, 
+    strategy.rent.monthlyRent,
+    carryCosts.totalMonthlyCosts + strategy.rent.vacancyAmount + strategy.rent.propertyManagementAmount
+  )
+  carryCosts = carryCostsLib.simulate(
+    strategy.rehab.afterRepairValue,
+    {
+      ...strategy,
+      monthlyLoanPayment: refinance.monthlyPayment
+    }
+  )  
+  refinance.carryCosts = carryCosts
+  return refinance
 }
 
-const simulate = financeDetails => {
-  if(financeDetails?.traditionalMortgageRefinance) {
-    return refinance(traditionalMortgageRefinanceLib, financeDetails.traditionalMortgageRefinance, financeDetails.investment)
+const strategyToLibraryMap = {
+  debtServiceCoverageRatioLoan: debtServiceCoverageRatioLoanLib,
+  conventionalLoan: conventionalLoanLib
+};
+
+const simulate = strategy => {
+  validate(strategy)
+  const lib = strategyToLibraryMap[strategy.refinance.loan.type]
+  if(lib) {
+    const calculations = refinance(lib, strategy)
+    strategy.refinance.carryCosts = { ...calculations.carryCosts };
+    strategy.refinance.loan = { ...strategy.refinance.loan, ...calculations };
+    delete strategy.refinance.loan.carryCosts
+    return strategy
   }
-  
-/*  
-  else if(financeDetails?.commercialLoan) {
-   return refinance(commercialLoanLib, financeDetails.commercialLoan, financeDetails.investment)
-  }
-*/  
   console.warn('No refinance method was recognized.')
-  console.warn('Try passing a "traditionalMortgageRefinance" property.')
+  console.warn('Try passing a loan property with type of "debtServiceCoverageRatioLoan".')
   return null
 }
+
+function mapKeysToString (map) {
+  let keyString = '';
+  for (const key in map) {
+    keyString += key + ', ';
+  }
+  if (keyString.length > 0) {
+    keyString = keyString.slice(0, -2);
+  }
+  return keyString
+}
+
+const validate = strategy => {
+  if(!strategy.refinance.loan) {
+    const error = '"strategy.refinance" must include "loan"'
+    console.error(error)
+    throw new Error(error)
+  }
+  if(!strategy.refinance.loan.type) {
+    const error = '"strategy.refinance.loan" must include "type"'
+    console.error(error)
+    throw new Error(error)
+  }
+  if(!strategyToLibraryMap[strategy.refinance.loan.type]) {
+    const error = `"strategy.refinance.loan.type" must be one of: ${mapKeysToString(strategyToLibraryMap)}`
+    console.error(error)
+    throw new Error(error)
+  }
+}
+
 
 module.exports = {
   simulate

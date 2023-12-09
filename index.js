@@ -4,71 +4,28 @@ const rent = require('./simulations/rent');
 const refinance = require('./simulations/refinance');
 const percentage = require('./math/percentage');
 
-const simulate = parameters => {
-  if(!parameters.traditionalMortgageLoan &&
-     !parameters.cashPurchase &&
-     !parameters.hardMoneyLoan
-  ) {
-    console.log('traditionalMortgageLoan, cashPurchase, or hardMoneyLoan parameter is required')
-    return null
-  }
-  if(!parameters.propertyOwnershipRates) {
-    console.log('propertyOwnershipRates is required')
-    return null
-  }
-  if(!parameters.rehabParameters) {
-    console.log('rehabParameters is required')
-    return null
-  }
-  if(!parameters.cashflowParameters) {
-    console.log('cashflowParameters is required')
-    return null
-  }
-  if(!parameters.traditionalMortgageRefinance
-  ) {
-   console.log('traditionalMortgageRefinance parameter is required')
-   return null
- }
- 
-  const propertyPrice = parameters.traditionalMortgageLoan?.propertyPrice ?? 
-                        parameters.cashPurchase?.propertyPrice ??
-                        parameters.hardMoneyLoan.propertyPrice
+const simulate = strategy => {
+  validate(strategy)
+  strategy = buy.simulate(strategy)
+  strategy = rehab.simulate(strategy)
+  strategy = rent.simulate(strategy)
+  strategy = refinance.simulate(strategy)
+  return strategy
+}
 
-  const buyResult = buy.simulate({ 
-    ...(parameters.traditionalMortgageLoan && { traditionalMortgageLoan: parameters.traditionalMortgageLoan }),
-    ...(parameters.cashPurchase && { cashPurchase: parameters.cashPurchase }),
-    ...(parameters.hardMoneyLoan && { hardMoneyLoan: parameters.hardMoneyLoan }),
-    propertyOwnershipRates: parameters.propertyOwnershipRates
-  })
-  const rehabResult = rehab.simulate({ 
-    ...parameters.rehabParameters,
-    propertyPrice
-  })
-
-  const rentResult = rent.simulate({
-    ...parameters.cashflowParameters,
-    carryingCosts: buyResult.carryCosts.totalMonthlyCosts
-  })
-  
-  const refinanceResult = refinance.simulate({
-    ...(parameters.traditionalMortgageRefinance && { 
-      traditionalMortgageRefinance: {
-        ...parameters.traditionalMortgageRefinance,
-        afterRepairValue: parameters.rehabParameters.afterRepairValue
-      }
-    }),
-    investment: {
-      downPayment: buyResult.downPayment,
-      closingCosts: buyResult.closingCosts,
-      carryingCosts: buyResult.carryCosts.totalMonthlyCosts,
-      rehabCosts: parameters.rehabParameters.repairCosts
+const validate = strategy => {
+  if(!strategy) {
+    const error = `"strategy" is required`
+    console.error(error)
+    throw new Error(error)
+  }
+  const steps = ['buy', 'rehab', 'rent', 'refinance', 'repeat']
+  for (const step of steps) {
+    if (!strategy[step]) {
+      const error = `"strategy" requires a ${step} property`
+      console.error(error)
+      throw new Error(error);
     }
-  })
-  return {
-    buy: buyResult,
-    rehab: rehabResult,
-    rent: rentResult,
-    refinance: refinanceResult
   }
 }
 

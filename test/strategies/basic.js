@@ -1,5 +1,3 @@
-const { simulate } = require('./index.js');
-
 const strategy = {
   buy: {
     property: {
@@ -11,7 +9,7 @@ const strategy = {
     loan: {
       type: 'buyAndRehabHardMoneyLoan',
       loanToValueRatio: 80,
-      interestRate: 10,
+      interestRate: 8,
       loanTermMonths: 12,
       closingCostRate: 2
     }
@@ -34,10 +32,7 @@ const strategy = {
       loanTermMonths: 12*30,
       closingCostRate: 2
     }
-  },
-  repeat: {
   }
-}
+};
 
-const result = simulate(strategy)
-console.log(result)
+module.exports = strategy

@@ -1,14 +1,17 @@
 // Function to calculate overall monthly carrying costs
-function simulate({ 
-  propertyPrice, 
+function simulate(value, {
+  buy: {
+    property: {
+      propertyTaxRate, 
+      insuranceRate, 
+      maintenanceRate 
+    }
+  },
   monthlyLoanPayment, 
-  propertyTaxRate, 
-  insuranceRate, 
-  maintenanceRate 
 }) {
-  const monthlyPropertyTax = propertyPrice * (propertyTaxRate / 12 / 100);
-  const monthlyInsurance = propertyPrice * (insuranceRate / 12 / 100);
-  const monthlyMaintenance = propertyPrice * (maintenanceRate / 12 / 100);
+  const monthlyPropertyTax = value * (propertyTaxRate / 12 / 100);
+  const monthlyInsurance = value * (insuranceRate / 12 / 100);
+  const monthlyMaintenance = value * (maintenanceRate / 12 / 100);
   const totalMonthlyCosts = monthlyLoanPayment + monthlyPropertyTax + monthlyInsurance + monthlyMaintenance;
   return {
     monthlyLoanPayment,

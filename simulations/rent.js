@@ -1,21 +1,28 @@
 const percentage = require('../math/percentage.js')
 
-// Function to calculate annual cash flow for a property
-function simulate({
-  monthlyRent,
-  propertyManagementRate,
-  vacancyRate,
-  carryingCosts
-}) {
-  const vacancyAmount = percentage.percentageAmount(monthlyRent, vacancyRate);
-  const propertyManagementAmount = percentage.percentageAmount(monthlyRent, propertyManagementRate);
-  const netMonthlyIncome = monthlyRent - (vacancyAmount + propertyManagementAmount + carryingCosts);
-  return {
+function simulate(strategy) {
+  validate(strategy)
+  const vacancyAmount = percentage.percentageAmount(strategy.rent.monthlyRent, strategy.rent.vacancyRate);
+  const propertyManagementAmount = percentage.percentageAmount(strategy.rent.monthlyRent, strategy.rent.propertyManagementRate);
+  const netMonthlyIncome = strategy.rent.monthlyRent - (vacancyAmount + propertyManagementAmount + strategy.buy.carryCosts.totalMonthlyCosts);
+  strategy.rent = {
+    ...strategy.rent,
     vacancyAmount,
     propertyManagementAmount,
-    monthlyCashFlow: netMonthlyIncome, 
-    annualCashFlow: netMonthlyIncome * 12 // Convert monthly cash flow to annual
-  };
+    monthlyCashFlowUntilRefinance: netMonthlyIncome
+  }
+  return strategy;
+}
+
+const validate = strategy => {
+  const requiredProps = ['monthlyRent', 'propertyManagementRate', 'vacancyRate']
+  for (const prop of requiredProps) {
+    if (!strategy.rent[prop]) {
+      const error = `"strategy.rent" requires a ${prop} property`
+      console.error(error)
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = {
