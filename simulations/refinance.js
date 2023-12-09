@@ -40,6 +40,7 @@ const simulate = strategy => {
     const calculations = refinance(lib, strategy)
     strategy.refinance.carryCosts = { ...calculations.carryCosts };
     strategy.refinance.loan = { ...strategy.refinance.loan, ...calculations };
+    delete strategy.refinance.loan.downPayment // Refinances don't have downpayments
     delete strategy.refinance.loan.carryCosts
     return strategy
   }

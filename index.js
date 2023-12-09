@@ -2,6 +2,7 @@ const buy = require('./simulations/buy');
 const rehab = require('./simulations/rehab');
 const rent = require('./simulations/rent');
 const refinance = require('./simulations/refinance');
+const repeat = require('./simulations/repeat');
 const percentage = require('./math/percentage');
 
 const simulate = strategy => {
@@ -10,6 +11,7 @@ const simulate = strategy => {
   strategy = rehab.simulate(strategy)
   strategy = rent.simulate(strategy)
   strategy = refinance.simulate(strategy)
+  strategy = repeat.simulate(strategy)
   return strategy
 }
 
@@ -35,5 +37,6 @@ module.exports = {
   rehab,
   rent,
   refinance,
+  repeat,
   percentage
 };
