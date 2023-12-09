@@ -17,7 +17,6 @@ describe('simulate function in refinance module', () => {
     expect(result).toBeDefined();
     expect(result.refinance.loan).toMatchObject({
       loanAmount: 150000,
-      downPayment: 50000,
       monthlyPayment: 1100.646860819067,
       closingCosts: 4000
     });

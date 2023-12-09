@@ -32,7 +32,47 @@ In your node application, `require` the plugin and call the `calculate` function
 ```javascript
 const brrrrNode = require('brrrr-node');
 
-const brrrr = brrrrNode.calculate(100000, 20000, 5000, 1000, 150000, 1200, 2000, 75, 8, 5, 2, 1, 1);
+const strategy = {
+  buy: {
+    property: {
+      price: 100000,
+      propertyTaxRate: 1.2,
+      insuranceRate: 0.6,
+      maintenanceRate: 0.3
+    },
+    loan: {
+      type: 'buyAndRehabHardMoneyLoan',
+      loanToValueRatio: 80,
+      interestRate: 10,
+      loanTermMonths: 12,
+      closingCostRate: 2
+    }
+  },
+  rehab: {
+    afterRepairValue: 200000,
+    repairCosts: 50000,
+    monthsToCompleteRepairs: 6
+  },
+  rent: {
+    monthlyRent: 1800,
+    propertyManagementRate: 6,
+    vacancyRate: 5
+  },
+  refinance: {
+    loan: {
+      type: 'debtServiceCoverageRatioLoan',
+      loanToValueRatio: 75,
+      interestRate: 8,
+      loanTermMonths: 12*30,
+      closingCostRate: 2
+    }
+  },
+  repeat: {
+  }
+}
+
+const brrrr = brrrrNode.simulate(strategy);
+console.log(brrrr)
 // ...
 ```
 
