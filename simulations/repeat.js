@@ -20,6 +20,10 @@ function simulate(strategy) {
     monthlyCashflow,
     annualCashflow: monthlyCashflow * 12
   }
+  const cashOnCashReturn = (strategy.repeat.cashflow.annualCashflow / strategy.repeat.cash.totalCashInvestment) * 100
+  strategy.repeat.analysis = {
+    cashOnCashReturn
+  }
   return strategy;
 }
 
