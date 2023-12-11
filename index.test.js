@@ -32,7 +32,8 @@ const strategy1 = {
       loanToValueRatio: 75,
       interestRate: 10,
       loanTermMonths: 12*30,
-      closingCostRate: 2
+      closingCostRate: 2,
+      seasoningMonths: 12
     }
   },
   repeat: {

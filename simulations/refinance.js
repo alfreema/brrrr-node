@@ -71,6 +71,11 @@ const validate = strategy => {
     console.error(error)
     throw new Error(error)
   }
+  if(!strategy.refinance.loan.seasoningMonths) {
+    const error = '"strategy.refinance.loan" must include "seasoningMonths"'
+    console.error(error)
+    throw new Error(error)
+  }
   if(!strategyToLibraryMap[strategy.refinance.loan.type]) {
     const error = `"strategy.refinance.loan.type" must be one of: ${mapKeysToString(strategyToLibraryMap)}`
     console.error(error)

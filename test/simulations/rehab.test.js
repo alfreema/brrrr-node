@@ -16,7 +16,7 @@ describe('simulate function in rehab module', () => {
 
   it('should handle missing required properties and throw an error', () => {
     const brokenStrategy = basicStrategy;
-    brokenStrategy.rehab.afterRepairValue = null; // Set a required property to null
+    delete brokenStrategy.rehab.afterRepairValue
     expect(() => rehabModule.simulate(brokenStrategy)).toThrowError();
   });
 });

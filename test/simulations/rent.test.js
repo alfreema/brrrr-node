@@ -17,7 +17,7 @@ describe('simulate function in rent module', () => {
     expect(result.rent).toMatchObject({
       vacancyAmount: 90,
       propertyManagementAmount: 108,
-      monthlyCashFlowUntilRefinance: 627
+      monthlyCashFlowUntilRefinance: 560.3333333333335
     });
   });
 

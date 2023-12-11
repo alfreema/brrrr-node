@@ -3,36 +3,34 @@ const { simulate } = require('./index.js');
 const strategy = {
   buy: {
     property: {
-      price: 100000,
+      price: 90000,
       propertyTaxRate: 1.2,
       insuranceRate: 0.6,
       maintenanceRate: 0.3
     },
     loan: {
-      type: 'buyAndRehabHardMoneyLoan',
-      loanToValueRatio: 80,
-      interestRate: 9,
-      loanTermMonths: 12,
+      type: 'cashPurchase',
       closingCostRate: 2
     }
   },
   rehab: {
-    afterRepairValue: 225000,
-    repairCosts: 60000,
-    monthsToCompleteRepairs: 1
+    afterRepairValue: 160000,
+    repairCosts: 35000,
+    monthsToCompleteRepairs: 4
   },
   rent: {
-    monthlyRent: 2100,
-    propertyManagementRate: 6,
+    monthlyRent: 2000,
+    propertyManagementRate: 8,
     vacancyRate: 5
   },
   refinance: {
     loan: {
       type: 'debtServiceCoverageRatioLoan',
-      loanToValueRatio: 75,
-      interestRate: 9,
+      loanToValueRatio: 79,
+      interestRate: 8.5,
       loanTermMonths: 12*30,
-      closingCostRate: 2
+      closingCostRate: 2,
+      seasoningMonths: 12
     }
   },
   repeat: {

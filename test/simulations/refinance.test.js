@@ -30,7 +30,9 @@ describe('simulate function in refinance module', () => {
 
   it('should handle missing required properties and throw an error', () => {
     // Create a strategy with missing required properties for testing error handling
-    const brokenStrategy = basicStrategy;
+    let brokenStrategy = buyModule.simulate(basicStrategy);
+    brokenStrategy = rehabModule.simulate(brokenStrategy);
+    brokenStrategy = rentModule.simulate(brokenStrategy);
     brokenStrategy.refinance.loan.type = null; // Set a required property to null
     expect(() => refinanceModule.simulate(brokenStrategy)).toThrowError();
   });

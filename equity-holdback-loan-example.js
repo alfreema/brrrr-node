@@ -22,10 +22,10 @@ const strategy = {
   rehab: {
     afterRepairValue: 225000,
     repairCosts: 60000,
-    monthsToCompleteRepairs: 9
+    monthsToCompleteRepairs: 10
   },
   rent: {
-    monthlyRent: 2100,
+    monthlyRent: 2000,
     propertyManagementRate: 6,
     vacancyRate: 5
   },
@@ -35,7 +35,8 @@ const strategy = {
       loanToValueRatio: 79,
       interestRate: 8,
       loanTermMonths: 12*30,
-      closingCostRate: 2
+      closingCostRate: 2,
+      seasoningMonths: 12
     }
   },
   repeat: {

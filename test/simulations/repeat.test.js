@@ -17,7 +17,7 @@ describe('simulate function in refinance module', () => {
     strategy = refinanceModule.simulate(strategy);
     const result = repeatModule.simulate(strategy);
     expect(result).toBeDefined();
-    expect(result.repeat.cash.cashOut).toBe(-18700);
+    expect(result.repeat.cash.cashOut).toBe(-18500);
   });
 
   it('should handle missing required properties and throw an error', () => {

@@ -1,11 +1,12 @@
 // Function to simulate property purchase
-const simulate = ({ propertyPrice, closingCostRate }) => {
-  const closingCosts = propertyPrice * (closingCostRate / 100);
-  const monthlyPayment = 0
+const simulate = (purchasePrice, { propertyPrice, closingCostRate }) => {
+  const closingCosts = purchasePrice * (closingCostRate / 100);
   return {
-    downPayment: propertyPrice,
-    monthlyPayment,
-    closingCosts
+    downPayment: purchasePrice,
+    loanAmount: 0,
+    monthlyPayment: 0,
+    closingCosts,
+    equityHoldback: 0
   };
 };
 
