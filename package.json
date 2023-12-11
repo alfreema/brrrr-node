@@ -12,6 +12,7 @@
   "author": "Aaron Freeman",
   "license": "ISC",
   "dependencies": {
+    "finance": "github:alfreema/finance",
     "jest": "^29.7.0"
   }
 }

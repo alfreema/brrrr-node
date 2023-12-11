@@ -11,6 +11,7 @@ const strategy = {
       loanToValueRatio: 80,
       interestRate: 8,
       loanTermMonths: 12,
+      interestOnly: true,
       closingCostRate: 2
     }
   },

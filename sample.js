@@ -9,7 +9,11 @@ const strategy = {
       maintenanceRate: 0.3
     },
     loan: {
-      type: 'cashPurchase',
+      type: 'buyAndRehabHardMoneyLoan',
+      loanToValueRatio: 80,
+      interestRate: 10,
+      loanTermMonths: 60,
+      interestOnly: false,
       closingCostRate: 2
     }
   },
