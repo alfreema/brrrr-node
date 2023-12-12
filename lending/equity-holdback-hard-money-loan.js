@@ -10,7 +10,8 @@ const barLoan = require('./buy-and-rehab-hard-money-loan.js')
  * @param {*} repairCosts (Optional) If this is included, it's assumed that the initial loan will cover both 'buy' and 'rehab' totals
  * @returns 
  */
-const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonths, closingCostRate, equityHoldbackLoanToValueRatio }, repairCosts, afterRepairValue ) => {
+const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonths, closingCostRate, equityHoldbackLoanToValueRatio, interestOnly = true }, repairCosts, afterRepairValue ) => {
+  console.log(purchasePrice, loanToValueRatio, interestRate, loanTermMonths, closingCostRate, equityHoldbackLoanToValueRatio, interestOnly, repairCosts, afterRepairValue)
   const buyAndHoldLoan = barLoan.simulate(purchasePrice, { loanToValueRatio, interestRate, loanTermMonths, closingCostRate }, repairCosts)
   const loanAmount = afterRepairValue * (equityHoldbackLoanToValueRatio / 100);
   const equityHoldback = loanAmount - buyAndHoldLoan.loanAmount;
@@ -25,7 +26,7 @@ const simulate = (purchasePrice, { loanToValueRatio, interestRate, loanTermMonth
     closingCosts,
     equityHoldback
   };
-}
+}  
 
 module.exports = {
   simulate
