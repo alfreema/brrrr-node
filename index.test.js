@@ -1,4 +1,4 @@
-const { simulate } = require('./index');
+const { simulate } = require('./index.js');
 
 const strategy1 = {
   buy: {

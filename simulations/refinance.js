@@ -1,30 +1,20 @@
 const conventionalLoanLib = require('../lending/conventional-loan.js')
 const debtServiceCoverageRatioLoanLib = require('../lending/debt-service-coverage-ratio-loan.js')
 
+// All of the loans use "buy.loan", so the strategy is to make a deep copy of the "strategy"
+// object, then overwrite the copy's buy.loan values to calculate the loan, then update
+// the "refinance" section of the original "strategy"
 const refinance = (lib, strategy) => {
-  // Need to calculate expenses first
+  // Make a deep copy of "strategy" so we don't overwrite values
+  const copyStrategy = JSON.parse(JSON.stringify(strategy));
   const carryCostsLib = require('../lending/carrying-costs.js')
-  let carryCosts = carryCostsLib.simulate(
-    strategy.rehab.afterRepairValue,
-    {
-      ...strategy,
-      monthlyLoanPayment: 0
-    }
-  )
-  const refinance = lib.simulate(
-    strategy.rehab.afterRepairValue, 
-    strategy.refinance.loan, 
-    strategy.rent.monthlyRent,
-    carryCosts.totalMonthlyCosts + strategy.rent.vacancyAmount + strategy.rent.propertyManagementAmount
-  )
-  carryCosts = carryCostsLib.simulate(
-    strategy.rehab.afterRepairValue,
-    {
-      ...strategy,
-      monthlyLoanPayment: refinance.monthlyPayment
-    }
-  )  
-  refinance.carryCosts = carryCosts
+  copyStrategy.buy.loan = copyStrategy.refinance.loan
+  copyStrategy.buy.carryCosts = carryCostsLib.simulate(strategy, strategy.rehab.afterRepairValue)
+  copyStrategy.buy.carryCosts.totalMonthlyCosts -= copyStrategy.buy.carryCosts.monthlyLoanPayment
+  copyStrategy.buy.property.price = copyStrategy.rehab.afterRepairValue
+  copyStrategy.rehab.repairCosts = 0
+  const refinance = lib.simulate(copyStrategy)
+  refinance.carryCosts = carryCostsLib.simulate(strategy, strategy.rehab.afterRepairValue, refinance.monthlyPayment)
   return refinance
 }
 

@@ -1,5 +1,4 @@
 // Based on the description found here:  https://www.youtube.com/watch?v=R7efrjnC95Y
-
 const { simulate } = require('./index.js');
 
 const strategy = {
@@ -36,6 +35,7 @@ const strategy = {
       interestRate: 8,
       loanTermMonths: 12*30,
       closingCostRate: 2,
+      interestOnly: false,
       seasoningMonths: 12
     }
   },

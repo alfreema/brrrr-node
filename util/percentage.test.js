@@ -1,4 +1,4 @@
-const { percentageAmount } = require('./percentage');
+const { percentageAmount } = require('./percentage.js');
 
 // Test cases for percentageAmount function
 describe('percentageAmount function', () => {

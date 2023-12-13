@@ -1,4 +1,4 @@
-const percentage = require('../math/percentage.js')
+const percentage = require('../util/percentage.js')
 
 function simulate(strategy) {
   validate(strategy)

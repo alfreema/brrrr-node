@@ -17,14 +17,14 @@ describe('simulate function in refinance module', () => {
     expect(result).toBeDefined();
     expect(result.refinance.loan).toMatchObject({
       loanAmount: 150000,
-      monthlyPayment: 1100.646860819067,
+      monthlyPayment: 1100.65,
       closingCosts: 4000
     });
     expect(result.refinance.carryCosts).toMatchObject({
       monthlyPropertyTax: 200,
       monthlyInsurance: 100,
       monthlyMaintenance: 50,
-      totalMonthlyCosts: 1450.646860819067
+      totalMonthlyCosts: 1450.65
     });
   });
 

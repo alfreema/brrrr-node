@@ -3,28 +3,29 @@ const { simulate } = require('./index.js');
 const strategy = {
   buy: {
     property: {
-      price: 90000,
+      price: 325000,
       propertyTaxRate: 1.2,
       insuranceRate: 0.6,
       maintenanceRate: 0.3
     },
     loan: {
-      type: 'buyAndRehabHardMoneyLoan',
+      type: 'equityHoldbackHardMoneyLoan',
       loanToValueRatio: 80,
-      interestRate: 10,
+      interestRate: 9.35,
       loanTermMonths: 60,
-      interestOnly: false,
+      interestOnly: true,
+      equityHoldbackLoanToValueRatio: 79,
       closingCostRate: 2
     }
   },
   rehab: {
-    afterRepairValue: 160000,
-    repairCosts: 35000,
-    monthsToCompleteRepairs: 4
+    afterRepairValue: 625000,
+    repairCosts: 140000,
+    monthsToCompleteRepairs: 6
   },
   rent: {
-    monthlyRent: 2000,
-    propertyManagementRate: 8,
+    monthlyRent: 7000,
+    propertyManagementRate: 7,
     vacancyRate: 5
   },
   refinance: {

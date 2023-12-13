@@ -1,20 +1,13 @@
 const buyAndRehabHardMoneyLoanLib = require('../lending/buy-and-rehab-hard-money-loan.js')
 const conventionalLoanLib = require('../lending/conventional-loan.js')
 const cashPurchaseLib = require('../lending/cash-purchase.js')
-const hardMoneyLoanLib = require('../lending/hard-money-loan.js')
-const homestyleLoanLib = require('../lending/homestyle-loan.js')
 const equityHoldbackHardMoneyLoanLib = require('../lending/equity-holdback-hard-money-loan.js')
 
 const purchase = (lib, strategy) => {
-  const purchase = lib.simulate(strategy.buy.property.price, strategy.buy.loan, strategy.rehab.repairCosts, strategy.rehab.afterRepairValue)
+  //const purchase = lib.simulate(strategy.buy.property.price, strategy.buy.loan, strategy.rehab.repairCosts, strategy.rehab.afterRepairValue)
+  const purchase = lib.simulate(strategy)
   const carryCostsLib = require('../lending/carrying-costs.js')
-  purchase.carryCosts = carryCostsLib.simulate(
-    strategy.buy.property.price,
-    {
-      ...strategy,
-      monthlyLoanPayment: purchase.monthlyPayment
-    }
-  )
+  purchase.carryCosts = carryCostsLib.simulate(strategy, strategy.buy.property.price, purchase.monthlyPayment)
   return purchase
 }
 
@@ -22,9 +15,7 @@ const strategyToLibraryMap = {
   buyAndRehabHardMoneyLoan: buyAndRehabHardMoneyLoanLib,
   equityHoldbackHardMoneyLoan: equityHoldbackHardMoneyLoanLib,
   conventionalLoan: conventionalLoanLib,
-  cashPurchase: cashPurchaseLib,
-  hardMoneyLoan: hardMoneyLoanLib,
-  homestyleLoan: homestyleLoanLib,
+  cashPurchase: cashPurchaseLib
 };
 
 const simulate = strategy => {
@@ -66,7 +57,7 @@ const validate = strategy => {
     console.error(error)
     throw new Error(error)
   }
-  const validLoanTypes = ['buyAndRehabHardMoneyLoan', 'equityHoldbackHardMoneyLoan', 'conventionalLoan', 'cashPurchase', 'hardMoneyLoan']
+  const validLoanTypes = ['buyAndRehabHardMoneyLoan', 'equityHoldbackHardMoneyLoan', 'conventionalLoan', 'cashPurchase']
   if(!validLoanTypes.includes(strategy.buy.loan.type)) {
     const error = `"strategy.buy.loan.type" must be one of: ${validLoanTypes}`
     console.error(error)

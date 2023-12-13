@@ -1,3 +1,5 @@
+const { verifyProperties } = require('../util/validate.js')
+
 function simulate(strategy) {
   validate(strategy)
   const purchaseLoanCosts = strategy.buy.loan.downPayment + strategy.buy.loan.closingCosts;
@@ -47,6 +49,7 @@ function simulate(strategy) {
 }
 
 // Function to check if properties exist
+/*
 function verifyProperties(strategy, properties) {
   for (let i = 0; i < properties.length; i++) {
     const propertyPath = properties[i].split('.');
@@ -65,7 +68,7 @@ function verifyProperties(strategy, properties) {
   }
   return true;
 }
-
+*/
 const validate = strategy => {
   const propertiesToVerify = [
     'buy.carryCosts.totalMonthlyCosts',

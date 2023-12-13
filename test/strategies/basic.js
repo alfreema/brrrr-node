@@ -32,6 +32,7 @@ const strategy = {
       interestRate: 8,
       loanTermMonths: 12*30,
       closingCostRate: 2,
+      interestOnly: false,
       seasoningMonths: 12
     }
   },

@@ -1,26 +1,29 @@
-// Function to calculate monthly mortgage payment
-function calculateMonthlyPayment(loanAmount, annualInterestRate, loanTermYears) {
-  const monthlyInterestRate = annualInterestRate / 12 / 100;
-  const totalPayments = loanTermYears * 12;
-  const discountFactor = (Math.pow(1 + monthlyInterestRate, totalPayments) - 1) /
-    (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments));
-  const monthlyPayment = loanAmount / discountFactor;
-  return monthlyPayment;
-}
+const loan = require('./loan.js')
+const { verifyProperties } = require('../util/validate.js')
 
-// Function to simulate property purchase
-const simulate = ({ propertyPrice, downPaymentPercentage, loanTermYears, annualInterestRate, closingCostRate }) => {
-  const downPayment = propertyPrice * (downPaymentPercentage / 100);
-  const loanAmount = propertyPrice - downPayment;
-  const closingCosts = propertyPrice * (closingCostRate / 100);
-  const monthlyPayment = calculateMonthlyPayment(loanAmount, annualInterestRate, loanTermYears);
-  return {
-    downPayment,
-    loanAmount,
-    monthlyPayment,
-    closingCosts
-  };
+const simulate = strategy => {
+  validate(strategy)
+  const {
+    buy: {
+      loan: {
+        downPaymentPercentage
+      }
+    }
+  } = strategy;
+  
+  strategy.buy.loan.loanToValueRatio = 100 - downPaymentPercentage;
+  return loan.simulate(strategy);
 };
+
+const validate = strategy => {
+  if(!verifyProperties(strategy, [
+    'buy.loan.downPaymentPercentage',
+  ])) {
+    const error = '"Missing property!'
+    console.error(error)
+    throw new Error(error)
+  }
+}
 
 module.exports = {
   simulate,

@@ -1,9 +1,9 @@
-const buy = require('./simulations/buy');
-const rehab = require('./simulations/rehab');
-const rent = require('./simulations/rent');
-const refinance = require('./simulations/refinance');
-const repeat = require('./simulations/repeat');
-const percentage = require('./math/percentage');
+const buy = require('./simulations/buy.js');
+const rehab = require('./simulations/rehab.js');
+const rent = require('./simulations/rent.js');
+const refinance = require('./simulations/refinance.js');
+const repeat = require('./simulations/repeat.js');
+const percentage = require('./util/percentage.js');
 
 const simulate = strategy => {
   validate(strategy)
