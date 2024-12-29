@@ -4,7 +4,6 @@ const cashPurchaseLib = require('../lending/cash-purchase.js')
 const equityHoldbackHardMoneyLoanLib = require('../lending/equity-holdback-hard-money-loan.js')
 
 const purchase = (lib, strategy) => {
-  //const purchase = lib.simulate(strategy.buy.property.price, strategy.buy.loan, strategy.rehab.repairCosts, strategy.rehab.afterRepairValue)
   const purchase = lib.simulate(strategy)
   const carryCostsLib = require('../lending/carrying-costs.js')
   purchase.carryCosts = carryCostsLib.simulate(strategy, strategy.buy.property.price, purchase.monthlyPayment)

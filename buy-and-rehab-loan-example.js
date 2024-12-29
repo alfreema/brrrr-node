@@ -3,7 +3,7 @@ const { simulate } = require('./index.js');
 const strategy = {
   buy: {
     property: {
-      price: 100000,
+      price: 250000,
       propertyTaxRate: 1.2,
       insuranceRate: 0.6,
       maintenanceRate: 0.3
@@ -17,12 +17,12 @@ const strategy = {
     }
   },
   rehab: {
-    afterRepairValue: 225000,
-    repairCosts: 60000,
-    monthsToCompleteRepairs: 9
+    afterRepairValue: 337500,
+    repairCosts: 31250,
+    monthsToCompleteRepairs: 5
   },
   rent: {
-    monthlyRent: 2100,
+    monthlyRent: 2500,
     propertyManagementRate: 6,
     vacancyRate: 5
   },
@@ -30,11 +30,11 @@ const strategy = {
     loan: {
       type: 'debtServiceCoverageRatioLoan',
       loanToValueRatio: 75,
-      interestRate: 9,
+      interestRate: 6.82,
       loanTermMonths: 12*30,
-      closingCostRate: 2,
+      closingCostRate: 1.11111,
       interestOnly: false,
-      seasoningMonths: 12
+      seasoningMonths: 0
     }
   },
   repeat: {

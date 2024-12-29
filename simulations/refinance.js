@@ -61,7 +61,7 @@ const validate = strategy => {
     console.error(error)
     throw new Error(error)
   }
-  if(!strategy.refinance.loan.seasoningMonths) {
+  if(!strategy.refinance.loan.seasoningMonths && strategy.refinance.loan.seasoningMonths < 0) {
     const error = '"strategy.refinance.loan" must include "seasoningMonths"'
     console.error(error)
     throw new Error(error)

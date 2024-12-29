@@ -10,7 +10,11 @@ function simulate(strategy) {
                               incomeAfterRehab +
                               strategy.refinance.loan.closingCosts;
   const cashOut = strategy.refinance.loan.loanAmount - strategy.buy.loan.loanAmount - totalCashInvestment + strategy.buy.loan.equityHoldback;
+  const perfectLoan = strategy.buy.loan.loanAmount + totalCashInvestment - strategy.refinance.loan.closingCosts - strategy.buy.loan.equityHoldback;
+  const perfectLoanCosts = perfectLoan * (strategy.refinance.loan.closingCostRate/100);
+  const perfectARV = (perfectLoan + perfectLoanCosts) * (100/strategy.refinance.loan.loanToValueRatio);
   strategy.repeat.cash = {
+    perfectARV,
     purchaseLoanCosts,
     carryCostsDuringRehab,
     incomeAfterRehab,

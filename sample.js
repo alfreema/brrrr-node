@@ -3,7 +3,7 @@ const { simulate } = require('./index.js');
 const strategy = {
   buy: {
     property: {
-      price: 325000,
+      price: 350000,
       propertyTaxRate: 1.2,
       insuranceRate: 0.6,
       maintenanceRate: 0.3
@@ -11,20 +11,20 @@ const strategy = {
     loan: {
       type: 'equityHoldbackHardMoneyLoan',
       loanToValueRatio: 80,
-      interestRate: 9.35,
-      loanTermMonths: 60,
+      interestRate: 8.25,
+      loanTermMonths: 12,
       interestOnly: true,
       equityHoldbackLoanToValueRatio: 79,
       closingCostRate: 2
     }
   },
   rehab: {
-    afterRepairValue: 625000,
-    repairCosts: 140000,
-    monthsToCompleteRepairs: 6
+    afterRepairValue: 800000,
+    repairCosts: 300000,
+    monthsToCompleteRepairs: 10
   },
   rent: {
-    monthlyRent: 7000,
+    monthlyRent: 8000,
     propertyManagementRate: 7,
     vacancyRate: 5
   },
@@ -32,10 +32,11 @@ const strategy = {
     loan: {
       type: 'debtServiceCoverageRatioLoan',
       loanToValueRatio: 79,
-      interestRate: 8.5,
+      interestRate: 7.5,
       loanTermMonths: 12*30,
       closingCostRate: 2,
-      seasoningMonths: 12
+      seasoningMonths: 12,
+      interestOnly: false
     }
   },
   repeat: {
